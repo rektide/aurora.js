@@ -26,6 +26,7 @@ class WebAudioSource extends EventEmitter
                     dataEvent = ['data']
                     for i in [0..e.inputBuffer.numberOfChannels-1] by 1
                         channelData = new Buffer(e.inputBuffer.getChannelData i)
+                        dataEvent.push channelData
                     emit dataEvent...
 
             context = audioInputNode.context
@@ -39,7 +40,7 @@ class WebAudioSource extends EventEmitter
                 32
                 context.sampleRate
                 @options.channels
-                @options.BufferSize
+                @options.bufferSize
             )
             @emit 'data', new Buffer(new Float32Array(signal))
 
